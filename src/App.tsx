@@ -4,6 +4,8 @@ import Movies from "./components/Movies";
 import Stocks from "./components/Stocks";
 import PageNotFound from "./components/PageNotFound";
 import NotLoggedIn from "./components/NotLoggedIn";
+import { movies } from "./data/movieData";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   return (
@@ -11,6 +13,10 @@ function App() {
       <h1>App Component</h1>
       <nav className="nav comp">
         <ul>
+          <li>
+            <a href="/">Anchor</a>
+          </li>
+
           <li>
             <NavLink
               to={"/"}
@@ -43,7 +49,7 @@ function App() {
 
           <li>
             <NavLink
-              to={"/movies"}
+              to={"/movies/"}
               style={({ isActive, isPending, isTransitioning }) => {
                 return {
                   fontWeight: isActive ? "bold" : "",
@@ -57,10 +63,15 @@ function App() {
           </li>
         </ul>
       </nav>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/stocks" element={<Stocks />} />
-        <Route path="/movies" element={<Movies />} />
+
+        <Route path="/movies/*" element={<Movies movies={movies} />}>
+          <Route path=":movieId" element={<MovieDetails />} />
+        </Route>
+
         <Route path="/not-logged-in" element={<NotLoggedIn />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

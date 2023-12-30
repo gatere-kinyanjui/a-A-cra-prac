@@ -12,12 +12,14 @@ a {
   color: purple;
 }
 
-ul {
+ul,
+nav {
   list-style: none;
   padding: 0;
 }
 
-li {
+li,
+NavLink {
   display: inline;
   padding: 10px;
 }
